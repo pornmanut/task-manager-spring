@@ -1,17 +1,23 @@
-package com.pornmanut.taskmanager;
+package com.pornmanut.taskmanager.domain;
 
 public class Task {
     public enum Status {
         TODO, DOING, DONE
     }
+    private String id;
     private String name;
     private String description;
     private Status status;
 
-    public Task(String name, String description, Status status) {
+    public Task(String id, String name, String description, Status status) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -24,6 +30,10 @@ public class Task {
 
     public Status getStatus() {
         return status;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {
