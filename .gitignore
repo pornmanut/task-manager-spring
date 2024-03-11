@@ -1,5 +1,8 @@
 target/
 
+# Sam template
+.aws-sam/
+
 # Compiled class file
 *.class
 
