@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: task manager application using java and spring boot
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 128
+    Architectures:
+    - arm64
+Resources:
+  TaskManagerApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+  TaskManagerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: ${AWS::StackName}-TaskManagerFunction
+      PackageType: Image
+      Events:
+        ApiEvents:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+            RestApiId:
+              Ref: TaskManagerApi
+      ImageUri: taskmanagerfunction:latest
+    Metadata:
+      DockerContext: /Users/vanilas/Code/github.com/pornmanut/task-manager-spring
+      DockerTag: latest
+      Dockerfile: Dockerfile
+      SamResourceId: TaskManagerFunction
+Outputs:
+  ApiEndpoint:
+    Description: API endpoint URL for Prod stage
+    Value:
+      Fn::Sub: https://${TaskManagerApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
