@@ -1,6 +1,6 @@
-package com.pornmanut.taskmanager.infrastructure;
+package com.pornmanut.taskmanager.repository;
 
-import com.pornmanut.taskmanager.domain.Task;
+import com.pornmanut.taskmanager.model.Task;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

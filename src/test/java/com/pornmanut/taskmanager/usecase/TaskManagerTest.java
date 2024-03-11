@@ -1,7 +1,7 @@
-package com.pornmanut.taskmanager.application;
+package com.pornmanut.taskmanager.usecase;
 
-import com.pornmanut.taskmanager.domain.Task;
-import com.pornmanut.taskmanager.infrastructure.ITaskRepository;
+import com.pornmanut.taskmanager.model.Task;
+import com.pornmanut.taskmanager.repository.ITaskRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

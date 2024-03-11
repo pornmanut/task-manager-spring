@@ -1,4 +1,4 @@
-package com.pornmanut.taskmanager.domain;
+package com.pornmanut.taskmanager.model;
 
 public class Task {
     public enum Status {

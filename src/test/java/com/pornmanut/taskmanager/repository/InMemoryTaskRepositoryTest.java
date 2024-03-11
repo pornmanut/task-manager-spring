@@ -1,6 +1,6 @@
-package com.pornmanut.taskmanager.infrastructure;
+package com.pornmanut.taskmanager.repository;
 
-import com.pornmanut.taskmanager.domain.Task;
+import com.pornmanut.taskmanager.model.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 package com.pornmanut.taskmanager.presentation;
 
-import com.pornmanut.taskmanager.application.TaskManager;
-import com.pornmanut.taskmanager.domain.Task;
+import com.pornmanut.taskmanager.usecase.TaskManager;
+import com.pornmanut.taskmanager.model.Task;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
