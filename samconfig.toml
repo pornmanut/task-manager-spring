@@ -1,10 +1,10 @@
 version = 0.1
 [default.deploy.parameters]
-stack_name = "task-manager-spring"
+stack_name = "task-manager-spring-prod"
 resolve_s3 = true
-s3_prefix = "task-manager-spring"
+s3_prefix = "task-manager-spring-prod"
 region = "ap-southeast-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
 disable_rollback = true
-image_repositories = ["TaskManagerFunction=668933070809.dkr.ecr.ap-southeast-1.amazonaws.com/taskmanagerspringcc268896/taskmanagerfunctionbb077d9arepo"]
+image_repositories = ["TaskManagerFunction=668933070809.dkr.ecr.ap-southeast-1.amazonaws.com/taskmanagerspringprodc28048ff/taskmanagerfunctionbb077d9arepo"]

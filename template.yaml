@@ -5,7 +5,7 @@ Description: task manager application using java and spring boot
 Globals:
   Function:
     Timeout: 30
-    MemorySize: 128
+    MemorySize: 256
     Architectures:
       - arm64
 
