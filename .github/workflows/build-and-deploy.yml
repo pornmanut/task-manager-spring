@@ -27,7 +27,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Set up Sam CLI
-        uses: aws-actions/setup-python@v2
+        uses: aws-actions/setup-sam@v2
         with:
           use-installer: true
 
