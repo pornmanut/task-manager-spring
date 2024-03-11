@@ -15,7 +15,7 @@ public class TaskManager {
     private final ITaskRepository taskRepository;
 
     @Autowired
-    public TaskManager(@Qualifier("InMemoryTaskRepository") ITaskRepository taskRepository) {
+    public TaskManager(@Qualifier("DynamoDbTaskRepository") ITaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 

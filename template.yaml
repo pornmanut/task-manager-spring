@@ -15,11 +15,29 @@ Resources:
     Properties:
       StageName: Prod
 
+  TaskManagerTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: TaskManager
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
   TaskManagerFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub "${AWS::StackName}-TaskManagerFunction"
       PackageType: Image
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TaskManagerTable
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref TaskManagerTable
       Events:
         ApiEvents:
           Type: Api

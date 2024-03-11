@@ -7,12 +7,14 @@ import jakarta.validation.constraints.Pattern;
 
 public class TaskRequest {
 
-    @NotBlank(message = "Name is mandatory")
+    @NotBlank(message = "name is mandatory")
     private String name;
+
+    @NotBlank(message = "description is mandatory")
     private String description;
 
-    @NotBlank(message = "Status should be one of TODO, DOING, DONE")
-    @Pattern(regexp = "TODO|DOING|DONE", message = "Status should be one of TODO, DOING, DONE")
+    @NotBlank(message = "status should be one of TODO, DOING, DONE")
+    @Pattern(regexp = "TODO|DOING|DONE", message = "status should be one of TODO, DOING, DONE")
     private String status;
 
     public String getName() {
