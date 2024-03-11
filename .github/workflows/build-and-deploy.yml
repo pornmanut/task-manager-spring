@@ -50,4 +50,4 @@ jobs:
         run: sam build
 
       - name: Deploy
-        run: sam deploy --region ap-southeast-1 --no-fail-on-empty-changeset
+        run: sam deploy --no-fail-on-empty-changeset
