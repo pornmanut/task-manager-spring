@@ -2,6 +2,7 @@ package com.pornmanut.taskmanager.presentation;
 
 import com.pornmanut.taskmanager.application.TaskManager;
 import com.pornmanut.taskmanager.domain.Task;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,14 @@ public class TaskController {
 
     private final TaskManager taskManager;
 
+    @Autowired
     public TaskController(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
 
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
-        Task createdTask = taskManager.CreateTask(task.getName(), task.getDescription(), task.getStatus());
+        Task createdTask = taskManager.CreateTask(task.getName(), task.getDescription(), Task.Status.TODO);
         return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }
 

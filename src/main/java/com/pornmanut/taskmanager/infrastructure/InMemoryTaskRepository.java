@@ -1,11 +1,13 @@
 package com.pornmanut.taskmanager.infrastructure;
 
 import com.pornmanut.taskmanager.domain.Task;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class InMemoryTaskRepository {
+@Repository("InMemoryTaskRepository")
+public class InMemoryTaskRepository implements  ITaskRepository{
 
     private final ArrayList<Task> tasks;
 

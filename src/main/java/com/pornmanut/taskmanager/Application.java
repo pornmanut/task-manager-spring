@@ -5,10 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-public class TaskManagerSpring {
+public class Application {
 
     public static void main(String[] args) {
-        ApplicationContext ctx = SpringApplication.run(TaskManagerSpring.class, args);
-        System.out.println("Hello Spring Boot");
+        ApplicationContext ctx = SpringApplication.run(Application.class, args);
     }
 }
