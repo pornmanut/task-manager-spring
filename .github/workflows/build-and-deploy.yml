@@ -1,9 +1,6 @@
 name: Build and deploy
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 env:
@@ -36,7 +33,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package dependency:copy-dependencies --file pom.xml
 
       - name: Set up Sam CLI
         uses: aws-actions/setup-sam@v2

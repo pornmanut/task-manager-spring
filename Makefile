@@ -1,5 +1,5 @@
-clean-build:
-	mvn clean install
+build:
+	mvn clean package dependency:copy-dependencies
 
 docker-build:
 	docker build -t task-manger-spring:latest .
