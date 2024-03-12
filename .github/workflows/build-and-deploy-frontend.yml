@@ -26,18 +26,15 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Use Node.js 18.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
 
-      - name: Change directory to client
-        run: cd client
-
       - name: Install dependencies
-        run: npm install
+        run: cd client && npm install
 
       - name: Build
-        run: npm run build
+        run: cd client && npm run build
 
       - name: Copy to S3
-        run: aws s3 cp build {{ vars.S3_BUCKET_URL }} --recursive
+        run: aws s3 cp client/build {{ vars.S3_BUCKET_URL }} --recursive
