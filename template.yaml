@@ -39,6 +39,9 @@ Resources:
             Cookies:
               Forward: none
           ViewerProtocolPolicy: redirect-to-https
+          MaxTTL: 3600
+          DefaultTTL: 3600
+          MinTTL: 0
 
   CloudFrontOAI:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
