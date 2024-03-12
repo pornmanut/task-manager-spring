@@ -36,7 +36,7 @@ function App() {
     const newTask = {
       name: newTaskName,
       description: newTaskDescription,
-      status: 'TASK-MANAGER'
+      status: 'TODO'
     };
     taskManagerAPI.createTask(newTask)
       .then(() => {
