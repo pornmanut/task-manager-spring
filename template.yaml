@@ -9,6 +9,12 @@ Globals:
     Architectures:
       - arm64
 
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+      AllowOrigin: "'*'"
+
 Resources:
   TaskMangerClientBucket: # public s3 bucket to host the client
     Type: AWS::S3::Bucket
