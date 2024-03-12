@@ -7,7 +7,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.taskComponent {
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #ddd;
 }
