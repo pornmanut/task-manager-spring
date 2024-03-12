@@ -10,6 +10,41 @@ Globals:
       - arm64
 
 Resources:
+  TaskMangerClientBucket: # public s3 bucket to host the client
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${AWS::StackName}-task-manager-client"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        IgnorePublicAcls: false
+        BlockPublicPolicy: false
+        RestrictPublicBuckets: false
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - "*"
+            AllowedMethods:
+              - GET
+            AllowedOrigins:
+              - "*"
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+  TaskManagerClientBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref TaskMangerClientBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: "*"
+            Action:
+              - s3:GetObject
+            Resource:
+              - !Sub "arn:aws:s3:::${TaskMangerClientBucket}/*"
+
   TaskManagerApi:
     Type: AWS::Serverless::Api
     Properties:
@@ -55,3 +90,6 @@ Outputs:
   ApiEndpoint:
     Description: "API endpoint URL for Prod stage"
     Value: !Sub "https://${TaskManagerApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  S3Endpoint:
+    Description: "S3 bucket URL"
+    Value: !GetAtt TaskMangerClientBucket.WebsiteURL
