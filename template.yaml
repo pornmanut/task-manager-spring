@@ -16,26 +16,45 @@ Globals:
       AllowOrigin: "'*'"
 
 Resources:
-  TaskMangerClientBucket: # public s3 bucket to host the client
+  TaskMangerCloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Origins:
+          - DomainName: !GetAtt TaskMangerClientBucket.DomainName
+            Id: S3Origin
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub origin-access-identity/cloudfront/${CloudFrontOAI}
+        DefaultRootObject: index.html
+        DefaultCacheBehavior:
+          Compress: true
+          TargetOriginId: S3Origin
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+          ViewerProtocolPolicy: redirect-to-https
+
+  CloudFrontOAI:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: OAI for TaskManager app
+
+  TaskMangerClientBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub "${AWS::StackName}-task-manager-client"
       PublicAccessBlockConfiguration:
-        BlockPublicAcls: false
-        IgnorePublicAcls: false
-        BlockPublicPolicy: false
-        RestrictPublicBuckets: false
-      CorsConfiguration:
-        CorsRules:
-          - AllowedHeaders:
-              - "*"
-            AllowedMethods:
-              - GET
-            AllowedOrigins:
-              - "*"
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: error.html
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
 
   TaskManagerClientBucketPolicy:
     Type: AWS::S3::BucketPolicy
@@ -43,13 +62,11 @@ Resources:
       Bucket: !Ref TaskMangerClientBucket
       PolicyDocument:
         Statement:
-          - Sid: PublicReadGetObject
-            Effect: Allow
-            Principal: "*"
-            Action:
-              - s3:GetObject
-            Resource:
-              - !Sub "arn:aws:s3:::${TaskMangerClientBucket}/*"
+          - Effect: "Allow"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${TaskMangerClientBucket}/*"
+            Principal:
+              AWS: !Sub "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${CloudFrontOAI}"
 
   TaskManagerApi:
     Type: AWS::Serverless::Api
@@ -96,6 +113,9 @@ Outputs:
   ApiEndpoint:
     Description: "API endpoint URL for Prod stage"
     Value: !Sub "https://${TaskManagerApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  CloudFrontDistribution:
+    Description: "CloudFront distribution URL"
+    Value: !GetAtt TaskMangerCloudFrontDistribution.DomainName
   S3Endpoint:
     Description: "S3 bucket URL"
     Value: !GetAtt TaskMangerClientBucket.WebsiteURL
