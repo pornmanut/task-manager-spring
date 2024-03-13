@@ -35,11 +35,15 @@ const TaskComponent = ({ task, handleUpdate, handleDelete }: TaskProps) => {
   }, [handleDelete, task.id]);
 
   return (
-    <div className='taskComponent task-manager-task'>
-      <EditableField isEditing={isEditing} text={editedName} onChange={handleNameChange} />
-      <EditableField isEditing={isEditing} text={editedDescription} onChange={handleDescriptionChange} />
-      <StatusSelect isEditing={isEditing} status={selectedStatus} onChange={handleChange} />
-      <TaskButtons isEditing={isEditing} onUpdate={handleClick} onEdit={handleEditClick} onDelete={handleDeleteClick} />
+    <div className='task-manager-task'>
+        <div className='task-status'>
+            <StatusSelect isEditing={isEditing} status={selectedStatus} onChange={handleChange} />
+        </div>
+        <div className='task-body'>
+            <EditableField className="title" isEditing={isEditing} text={editedName} onChange={handleNameChange} />
+            <EditableField className="description" isEditing={isEditing} text={editedDescription} onChange={handleDescriptionChange} />
+        </div>
+        <TaskButtons isEditing={isEditing} onUpdate={handleClick} onEdit={handleEditClick} onDelete={handleDeleteClick} />
     </div>
   );
 }

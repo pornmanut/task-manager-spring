@@ -1,10 +1,17 @@
 import React from 'react';
 
-const EditableField = ({ isEditing, text, onChange }: { isEditing: boolean, text: string, onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void }) => {
+interface EditableFieldProps {
+  isEditing: boolean;
+  text: string;
+  className: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+}
+
+const EditableField = ({ isEditing, text, className, onChange }: EditableFieldProps) => {
   return isEditing ? (
-    <input type="text" value={text} onChange={onChange} />
+    <input className={`text-editable ${className}`} type="text" value={text} onChange={onChange} />
   ) : (
-    <h2>{text}</h2>
+    <p className={`text-editable ${className}`}>{text}</p>
   );
 }
 

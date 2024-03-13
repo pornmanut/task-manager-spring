@@ -1,29 +1,90 @@
-/* App.css */
+/* Reset margins and padding */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove default button styling */
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Remove default link styling */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Set base styles for body */
+body {
+  line-height: 1.6;
+}
+
+select {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.status-select,
+.status-text {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.status-todo {
+  background-color: coral;
+}
+
+.status-doing {
+  background-color: yellow;
+}
+
+.status-done {
+  background-color: lightgreen;
+}
 
 .task-manager-app {
   text-align: center;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #f4f4f4;
 }
 
-.task-manager-input {
-  width: 100%;
+.task-manager-create-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 10px;
-  margin: 10px 0;
-  box-sizing: border-box;
 }
 
-.task-manager-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
+.task-manager-create-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.task-manager-create-button {
+  padding: 10px;
+  border-radius: 5px;
   border: none;
+  background-color: #007BFF;
+  color: white;
   cursor: pointer;
-  text-align: center;
-  display: inline-block;
 }
 
 .task-manager-button:hover {
@@ -36,7 +97,7 @@
 }
 
 .task-manager-item {
-  padding: 20px;
+  padding: 5px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -49,52 +110,99 @@
 }
 
 .task-manager-task {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
   gap: 10px;
   padding: 10px;
-  margin: 10px 0;
+  min-height: 120px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.task-manager-task-title {
-  margin: 0;
-  font-size: 1.5em;
+.text-editable {
+  text-align: left;
+  padding: 10px 0 0 10px;
 }
 
-.task-manager-task-description {
-  margin: 10px 0;
+.text-editable[type="text"] {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-.task-manager-task-status {
-  margin: 10px 0;
+.text-editable.title {
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.task-manager-task-select {
-  margin: 10px 0;
+.text-editable.description {
+  font-size: 16px;
+  color: gray;
 }
 
-.task-manager-task-button {
-  padding: 10px 20px;
-  margin: 10px 2px;
-  background-color: #4CAF50;
-  color: white;
+.task-manager-task.task-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-button {
+  padding: 10px;
   border: none;
+  background: none;
   cursor: pointer;
-  text-align: center;
-  display: inline-block;
+  font-size: 1.1em;
 }
 
-.task-manager-task-button:hover {
-  background-color: #45a049;
+.task-button.update {
+  color: #4CAF50;
 }
 
-.task-manager-task-button.delete {
-  background-color: #f44336;
+.task-button.update:hover {
+  color: #45a049;
 }
 
-.task-manager-task-button.delete:hover {
-  background-color: #d32f2f;
+.task-button.edit {
+  color: #FFC107;
+}
+
+.task-button.edit:hover {
+  color: #FFB300;
+}
+
+.task-button.delete {
+  color: #f44336;
+}
+
+.task-button.delete:hover {
+  color: #d32f2f;
+}
+
+.loading-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 100vh;
+  background-color: #f3f3f3;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
